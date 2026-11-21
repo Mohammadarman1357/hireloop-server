@@ -31,11 +31,11 @@ async function run() {
 
         // create db and dbcollections
         const db = client.db("hire_loop_db");
-        const jobCollection = database.collection("jobs");
+        const jobCollection = db.collection("jobs");
 
         // recruiter
-        // post a job add
-        app.post('/jobs', async (req, res) => {
+        // add a job 
+        app.post('/api/jobs', async (req, res) => {
             const job = req.body;
             const result = await jobCollection.insertOne(job);
             res.send(result);

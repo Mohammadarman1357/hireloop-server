@@ -41,6 +41,19 @@ async function run() {
             res.send(result);
         })
 
+        // job get - showing job 
+        app.get('/api/jobs', async (req, res) => {
+            const query = {};
+            if (req.query.companyId) {
+                query.companyId = req.query.companyId;
+            }
+            if (req.query.status) {
+                query.status = req.query.status;
+            }
+            const cursor = jobCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
 
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged you deployment, You successfully connected to MongoDB!");
